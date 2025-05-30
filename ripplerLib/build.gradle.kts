@@ -1,3 +1,4 @@
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -76,7 +77,7 @@ fun loadProperties(): Properties {
 }
 
 mavenPublishing {
-    //publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
     signAllPublications()
 
@@ -86,6 +87,8 @@ mavenPublishing {
         name = "Rippler"
         description = "Compose multiplarform ripple indications library"
         inceptionYear = "2025"
+        url = "https://github.com/gleb-skobinsky/Rippler"
+
         licenses {
             license {
                 name = "The Apache License, Version 2.0"
@@ -101,10 +104,9 @@ mavenPublishing {
             }
         }
         scm {
-            url = "https://github.com/gleb-skobinsky/Rippler/"
+            url = "https://github.com/gleb-skobinsky/Rippler"
             connection = "scm:git:git://github.com/gleb-skobinsky/Rippler.git"
-            developerConnection =
-                "scm:git:ssh://git@github.com/gleb-skobinsky/Rippler.git"
+            developerConnection = "scm:git:ssh://git@github.com/gleb-skobinsky/Rippler.git"
         }
     }
 }
