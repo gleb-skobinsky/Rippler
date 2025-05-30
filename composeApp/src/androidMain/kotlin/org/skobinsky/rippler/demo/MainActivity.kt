@@ -1,4 +1,4 @@
-package org.skobinsky.rippler
+package org.skobinsky.rippler.demo
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

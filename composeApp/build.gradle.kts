@@ -61,6 +61,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
+            implementation(projects.ripplerLib)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -81,11 +82,11 @@ kotlin {
 }
 
 android {
-    namespace = "org.skobinsky.rippler"
+    namespace = "org.skobinsky.rippler.demo"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "org.skobinsky.rippler"
+        applicationId = "org.skobinsky.rippler.demo"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -113,11 +114,11 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "org.skobinsky.rippler.MainKt"
+        mainClass = "org.skobinsky.rippler.demo.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "org.skobinsky.rippler"
+            packageName = "org.skobinsky.rippler.demo"
             packageVersion = "1.0.0"
         }
     }
