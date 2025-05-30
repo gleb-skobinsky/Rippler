@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
@@ -43,7 +44,11 @@ fun UniversalButton() {
 @Composable
 fun FadingButton() {
     CompositionLocalProvider(
-        LocalIndication provides opacityRipple(300, 200)
+        LocalIndication provides opacityRipple(
+            fadeInDuration = 280,
+            fadeOutDuration = 0,
+            minAlpha = 0.25f
+        )
     ) {
         ClickableBox()
     }
@@ -124,7 +129,10 @@ private fun ClickableBox(
 @Composable
 fun ExampleButtonPreview() {
     Column(
-        modifier = Modifier.fillMaxSize().background(Color.Cyan),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Cyan)
+            .systemBarsPadding(),
         verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

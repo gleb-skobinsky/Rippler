@@ -12,10 +12,28 @@ struct ComposeView: UIViewControllerRepresentable {
 
 struct ContentView: View {
     var body: some View {
-        ComposeView()
-                .ignoresSafeArea(.keyboard) // Compose has own keyboard handler
+        ZStack {
+            ComposeView()
+            Button { } label: {
+                Text("SwiftUI Button")
+                    .foregroundColor(.black)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 48)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.lightGray)
+                    )
+                    .padding(.horizontal, 32)
+            }
+        }
+        .ignoresSafeArea(.all)
     }
 }
 
+extension Color {
+    public static var lightGray: Color {
+        return Color(white: 0.800)
+    }
+}
 
 
