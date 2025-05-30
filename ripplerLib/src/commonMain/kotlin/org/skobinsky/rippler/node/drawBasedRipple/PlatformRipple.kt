@@ -10,6 +10,7 @@ fun createUniversalRippleNode(
     interactionSource: InteractionSource,
     bounded: Boolean,
     radius: Dp,
+    startRadiusFraction: Float,
     color: ColorProducer,
     rippleAlpha: () -> RippleAlpha,
     drawCommand: RippleDrawCommand
@@ -20,6 +21,7 @@ fun createUniversalRippleNode(
         radius = radius,
         color = color,
         rippleAlpha = rippleAlpha,
+        startRadiusFraction = startRadiusFraction,
         drawCommand = drawCommand
     )
 }

@@ -66,6 +66,7 @@ val SmoothRippleCommand: RippleDrawCommand = { color, center, radius ->
 internal class RippleAnimation(
     private var origin: Offset?,
     private val radius: Float,
+    private val startRadiusFraction: Float,
     private val bounded: Boolean,
     private val onDraw: RippleDrawCommand = SmoothRippleCommand
 ) {
@@ -142,7 +143,7 @@ internal class RippleAnimation(
 
     fun DrawScope.draw(color: Color) {
         if (startRadius == null) {
-            startRadius = getRippleStartRadius(size)
+            startRadius = getRippleStartRadius(size, startRadiusFraction)
         }
         if (origin == null) {
             origin = center
@@ -183,8 +184,8 @@ internal class RippleAnimation(
  * According to specs the starting radius is equal to 60% of the largest dimension of the surface it
  * belongs to.
  */
-internal fun getRippleStartRadius(size: Size) =
-    max(size.width, size.height) * 0.3f
+internal fun getRippleStartRadius(size: Size, fraction: Float) =
+    max(size.width, size.height) * fraction
 
 /**
  * According to specs the ending radius

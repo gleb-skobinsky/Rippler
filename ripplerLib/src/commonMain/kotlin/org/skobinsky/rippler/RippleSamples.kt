@@ -26,8 +26,8 @@ import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.skobinsky.rippler.node.experimental.ExperimentalRippleApi
 import org.skobinsky.rippler.node.opacityRipple.opacityRipple
-import org.violet.uiKit.ripple.node.rememberCustomRipple
-import org.violet.uiKit.ripple.node.universalRipple
+import org.skobinsky.rippler.node.rememberCustomRipple
+import org.skobinsky.rippler.node.universalRipple
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -69,7 +69,8 @@ fun StarButton() {
     CompositionLocalProvider(
         LocalIndication provides rememberCustomRipple(
             color = Color.Red,
-            radius = 150.dp
+            radius = 150.dp,
+            startRadiusFraction = 0f
         ) { color, center, radius ->
             drawStar(radius, center, color)
         }

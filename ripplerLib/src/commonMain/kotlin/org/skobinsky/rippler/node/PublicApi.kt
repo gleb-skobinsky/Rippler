@@ -1,5 +1,6 @@
-package org.violet.uiKit.ripple.node
+package org.skobinsky.rippler.node
 
+import androidx.annotation.FloatRange
 import androidx.compose.foundation.IndicationNodeFactory
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -11,15 +12,24 @@ import org.skobinsky.rippler.node.drawBasedRipple.RippleDrawCommand
 import org.skobinsky.rippler.node.drawBasedRipple.RippleNodeFactory
 import org.skobinsky.rippler.node.experimental.ExperimentalRippleApi
 
+const val DefaultStartRadiusFraction = 0.3f
+
 @Stable
 fun universalRipple(
     bounded: Boolean = true,
     radius: Dp = Dp.Unspecified,
+    @FloatRange(0.0, 1.0)
+    startRadiusFraction: Float = DefaultStartRadiusFraction,
     color: Color = Color.Unspecified
 ): IndicationNodeFactory {
     return when {
         radius != Dp.Unspecified || color != Color.Unspecified -> {
-            RippleNodeFactory(bounded, radius, color)
+            RippleNodeFactory(
+                bounded = bounded,
+                radius = radius,
+                color = color,
+                startRadiusFraction = startRadiusFraction
+            )
         }
 
         bounded -> DefaultBoundedRipple
@@ -31,9 +41,16 @@ fun universalRipple(
 fun universalRipple(
     bounded: Boolean = true,
     radius: Dp = Dp.Unspecified,
+    @FloatRange(0.0, 1.0)
+    startRadiusFraction: Float = DefaultStartRadiusFraction,
     color: ColorProducer
 ): IndicationNodeFactory {
-    return RippleNodeFactory(bounded, radius, colorProducer = color)
+    return RippleNodeFactory(
+        bounded = bounded,
+        radius = radius,
+        colorProducer = color,
+        startRadiusFraction = startRadiusFraction
+    )
 }
 
 @Composable
@@ -42,6 +59,8 @@ fun rememberCustomRipple(
     bounded: Boolean = true,
     radius: Dp = Dp.Unspecified,
     color: Color = Color.Unspecified,
+    @FloatRange(0.0, 1.0)
+    startRadiusFraction: Float = DefaultStartRadiusFraction,
     drawCommand: RippleDrawCommand
 ): IndicationNodeFactory {
     val rememberedCommand = remember { drawCommand }
@@ -49,6 +68,7 @@ fun rememberCustomRipple(
         RippleNodeFactory(
             bounded = bounded,
             radius = radius,
+            startRadiusFraction = startRadiusFraction,
             color = color,
             drawCommand = rememberedCommand
         )
@@ -60,6 +80,8 @@ fun rememberCustomRipple(
 fun rememberCustomRipple(
     bounded: Boolean = true,
     radius: Dp = Dp.Unspecified,
+    @FloatRange(0.0, 1.0)
+    startRadiusFraction: Float = DefaultStartRadiusFraction,
     color: ColorProducer,
     drawCommand: RippleDrawCommand
 ): IndicationNodeFactory {
@@ -69,6 +91,7 @@ fun rememberCustomRipple(
             bounded = bounded,
             radius = radius,
             colorProducer = color,
+            startRadiusFraction = startRadiusFraction,
             drawCommand = rememberedCommand
         )
     }
@@ -77,10 +100,12 @@ fun rememberCustomRipple(
 private val DefaultBoundedRipple = RippleNodeFactory(
     bounded = true,
     radius = Dp.Unspecified,
-    color = Color.Unspecified
+    color = Color.Unspecified,
+    startRadiusFraction = DefaultStartRadiusFraction
 )
 private val DefaultUnboundedRipple = RippleNodeFactory(
     bounded = false,
     radius = Dp.Unspecified,
-    color = Color.Unspecified
+    color = Color.Unspecified,
+    startRadiusFraction = DefaultStartRadiusFraction
 )
