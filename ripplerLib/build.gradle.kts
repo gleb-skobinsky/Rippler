@@ -31,10 +31,6 @@ kotlin {
     sourceSets {
         val desktopMain by getting
 
-        androidMain.dependencies {
-            implementation(compose.preview)
-            implementation(libs.androidx.activity.compose)
-        }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -42,9 +38,6 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.collection)
-        }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
         }
         desktopMain.dependencies {
             implementation(libs.kotlinx.coroutinesSwing)
