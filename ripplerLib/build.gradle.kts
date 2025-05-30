@@ -2,6 +2,8 @@ import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.konan.properties.Properties
+import java.io.FileInputStream
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -9,6 +11,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.mavenPublish)
+    id("signing")
 }
 
 kotlin {
@@ -66,12 +69,19 @@ dependencies {
     debugImplementation(compose.uiTooling)
 }
 
+fun loadProperties(): Properties {
+    val keystorePropertiesFile = rootProject.file("local.properties")
+    val keystoreProperties = Properties()
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    return keystoreProperties
+}
+
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
     signAllPublications()
 
-    coordinates(group.toString(), "rippler", version.toString())
+    coordinates("io.github.gleb-skobinsky", "rippler", "1.0.0")
 
     pom {
         name = "Rippler"
@@ -97,4 +107,13 @@ mavenPublishing {
             developerConnection = "scm:git:ssh://git@github.com/gleb-skobinsky/Rippler.git"
         }
     }
+}
+
+signing {
+    val props = loadProperties()
+    useInMemoryPgpKeys(
+        props["signing.keyId"].toString(),
+        File(props["signing.secretKeyFile"].toString()).readText(),
+        props["signing.password"].toString()
+    )
 }
