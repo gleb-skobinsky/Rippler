@@ -16,8 +16,3 @@ captures
 !*.xcodeproj/project.xcworkspace/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
-
-# Project exclude paths
-/composeApp/
-/gradle/
-/iosApp/
