@@ -4,6 +4,7 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -44,7 +45,8 @@ internal class RippleAnimation(
     private val radius: Float,
     private val startRadiusFraction: Float,
     private val bounded: Boolean,
-    private val onDraw: RippleDrawCommand = SmoothRippleCommand
+    private val onDraw: RippleDrawCommand = SmoothRippleCommand,
+    private val animations: RippleAnimationDuration
 ) {
     private var startRadius: Float? = null
 
@@ -72,7 +74,7 @@ internal class RippleAnimation(
                 animatedAlpha.animateTo(
                     1f,
                     tween(
-                        durationMillis = FadeInDuration,
+                        durationMillis = animations.fadeInDuration,
                         easing = LinearEasing
                     )
                 )
@@ -81,7 +83,7 @@ internal class RippleAnimation(
                 animatedRadiusPercent.animateTo(
                     1f,
                     tween(
-                        durationMillis = RadiusDuration,
+                        durationMillis = animations.radiusDuration,
                         easing = FastOutSlowInEasing
                     )
                 )
@@ -90,7 +92,7 @@ internal class RippleAnimation(
                 animatedCenterPercent.animateTo(
                     1f,
                     tween(
-                        durationMillis = RadiusDuration,
+                        durationMillis = animations.radiusDuration,
                         easing = LinearEasing
                     )
                 )
@@ -104,7 +106,7 @@ internal class RippleAnimation(
                 animatedAlpha.animateTo(
                     0f,
                     tween(
-                        durationMillis = FadeOutDuration,
+                        durationMillis = animations.fadeOutDuration,
                         easing = LinearEasing
                     )
                 )
@@ -180,6 +182,21 @@ internal fun Density.getRippleEndRadius(bounded: Boolean, size: Size): Float {
 
 private val BoundedRippleExtraRadius = 10.dp
 
-private const val FadeInDuration = 75
-private const val RadiusDuration = 225
-private const val FadeOutDuration = 150
+@Immutable
+data class RippleAnimationDuration(
+    val fadeInDuration: Int = 75,
+    val radiusDuration: Int = 225,
+    val fadeOutDuration: Int = 150
+) {
+    companion object {
+        val Default = RippleAnimationDuration()
+    }
+
+    operator fun times(count: Int): RippleAnimationDuration {
+        return RippleAnimationDuration(
+            fadeInDuration = fadeInDuration * count,
+            radiusDuration = radiusDuration * count,
+            fadeOutDuration = fadeOutDuration * count
+        )
+    }
+}

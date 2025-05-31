@@ -16,6 +16,7 @@ internal class RippleNodeFactory(
     @FloatRange(0.0, 1.0)
     private val startRadiusFraction: Float,
     private val color: Color = Color.Companion.Unspecified,
+    private val animations: RippleAnimationDuration = RippleAnimationDuration.Default,
     private val colorProducer: ColorProducer? = null,
     private val drawCommand: RippleDrawCommand = SmoothRippleCommand
 ) : IndicationNodeFactory {
@@ -28,6 +29,7 @@ internal class RippleNodeFactory(
             radius = radius,
             color = userDefinedColorProducer,
             drawCommand = drawCommand,
+            animations = animations,
             startRadiusFraction = startRadiusFraction
         )
     }
@@ -39,6 +41,7 @@ internal class RippleNodeFactory(
         if (radius != other.radius) return false
         if (colorProducer != other.colorProducer) return false
         if (drawCommand != other.drawCommand) return false
+        if (animations != other.animations) return false
         return color == other.color
     }
 
@@ -48,6 +51,7 @@ internal class RippleNodeFactory(
         result = 31 * result + color.hashCode()
         result = 31 * result + colorProducer.hashCode()
         result = 31 * result + drawCommand.hashCode()
+        result = 31 * result + animations.hashCode()
         return result
     }
 }

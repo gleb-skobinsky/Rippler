@@ -13,6 +13,7 @@ fun createUniversalRippleNode(
     startRadiusFraction: Float,
     color: ColorProducer,
     rippleAlpha: () -> RippleAlpha,
+    animations: RippleAnimationDuration,
     drawCommand: RippleDrawCommand
 ): DelegatableNode {
     return CommonRippleNode(
@@ -22,6 +23,7 @@ fun createUniversalRippleNode(
         color = color,
         rippleAlpha = rippleAlpha,
         startRadiusFraction = startRadiusFraction,
+        animations = animations,
         drawCommand = drawCommand
     )
 }

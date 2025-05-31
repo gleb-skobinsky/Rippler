@@ -20,6 +20,7 @@ internal class DelegatingRippleNode(
     private val bounded: Boolean,
     private val radius: Dp,
     private val startRadiusFraction: Float,
+    private val animations: RippleAnimationDuration,
     color: ColorProducer,
     drawCommand: RippleDrawCommand
 ) : AbstractDelegatingRippleNode<DelegatableNode>(
@@ -32,6 +33,7 @@ internal class DelegatingRippleNode(
             color = color,
             rippleAlpha = alpha,
             drawCommand = drawCommand,
+            animations = animations,
             startRadiusFraction = startRadiusFraction
         )
     }

@@ -30,6 +30,7 @@ import org.skobinsky.rippler.node.experimental.ExperimentalRippleApi
 import org.skobinsky.rippler.node.opacityRipple.opacityRipple
 import org.skobinsky.rippler.node.rememberCustomRipple
 import org.skobinsky.rippler.node.universalRipple
+import org.skobinsky.rippler.node.waterRipple
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -78,15 +79,9 @@ fun MaterialButton() {
 @Composable
 fun StarButton() {
     CompositionLocalProvider(
-        LocalIndication provides rememberCustomRipple(
-            color = Color.Blue,
-            radius = 150.dp,
-            startRadiusFraction = 0f
-        ) { color, center, radius ->
-            drawStar(true, radius, center, color)
-        }
+        LocalIndication provides waterRipple()
     ) {
-        ClickableBox("Star", DpSize(300.dp, 300.dp))
+        ClickableBox("Water", DpSize(300.dp, 300.dp))
     }
 }
 

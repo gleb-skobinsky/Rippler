@@ -18,7 +18,8 @@ internal class CommonRippleNode(
     private val startRadiusFraction: Float,
     color: ColorProducer,
     rippleAlpha: () -> RippleAlpha,
-    private val drawCommand: RippleDrawCommand
+    private val drawCommand: RippleDrawCommand,
+    private val animations: RippleAnimationDuration
 ) : RippleNode(
     interactionSource = interactionSource,
     bounded = bounded,
@@ -47,7 +48,8 @@ internal class CommonRippleNode(
             radius = targetRadius,
             bounded = bounded,
             onDraw = drawCommand,
-            startRadiusFraction = startRadiusFraction
+            startRadiusFraction = startRadiusFraction,
+            animations = animations
         )
         ripples[interaction] = rippleAnimation
         coroutineScope.launch {
