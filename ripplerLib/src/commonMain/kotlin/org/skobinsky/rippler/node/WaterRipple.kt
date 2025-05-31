@@ -20,17 +20,21 @@ fun waterRipple(
     radius: Dp = Dp.Unspecified,
     @FloatRange(0.0, 1.0)
     startRadiusFraction: Float = WaterRippleStartRadius,
+    animations: RippleAnimationDuration = WatterRippleDurations,
     color: Color = Color.Unspecified
 ): IndicationNodeFactory {
     return when {
-        radius != Dp.Unspecified || color != Color.Unspecified -> {
+        radius != Dp.Unspecified ||
+                color != Color.Unspecified ||
+                startRadiusFraction != WaterRippleStartRadius ||
+                animations != WatterRippleDurations -> {
             RippleNodeFactory(
                 bounded = bounded,
                 radius = radius,
                 color = color,
                 startRadiusFraction = startRadiusFraction,
                 drawCommand = WaterRippleCommand,
-                animations = WatterRippleDurations
+                animations = animations
             )
         }
 
@@ -45,15 +49,16 @@ fun waterRipple(
     radius: Dp = Dp.Unspecified,
     @FloatRange(0.0, 1.0)
     startRadiusFraction: Float = WaterRippleStartRadius,
+    animations: RippleAnimationDuration = WatterRippleDurations,
     color: ColorProducer
 ): IndicationNodeFactory {
     return RippleNodeFactory(
         bounded = bounded,
         radius = radius,
         colorProducer = color,
+        animations = animations,
         startRadiusFraction = startRadiusFraction,
-        drawCommand = WaterRippleCommand,
-        animations = WatterRippleDurations
+        drawCommand = WaterRippleCommand
     )
 }
 

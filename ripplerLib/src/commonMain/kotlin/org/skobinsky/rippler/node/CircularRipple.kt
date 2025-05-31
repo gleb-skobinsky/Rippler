@@ -7,6 +7,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorProducer
 import androidx.compose.ui.unit.Dp
 import org.skobinsky.rippler.node.drawBasedRipple.CircularRippleCommand
+import org.skobinsky.rippler.node.drawBasedRipple.RippleAnimationDuration
 import org.skobinsky.rippler.node.drawBasedRipple.RippleNodeFactory
 
 @Stable
@@ -15,14 +16,19 @@ fun circularRipple(
     radius: Dp = Dp.Unspecified,
     @FloatRange(0.0, 1.0)
     startRadiusFraction: Float = DefaultStartRadiusFraction,
+    animations: RippleAnimationDuration = RippleAnimationDuration.Default,
     color: Color = Color.Unspecified
 ): IndicationNodeFactory {
     return when {
-        radius != Dp.Unspecified || color != Color.Unspecified -> {
+        radius != Dp.Unspecified ||
+                color != Color.Unspecified ||
+                startRadiusFraction != DefaultStartRadiusFraction ||
+                animations != RippleAnimationDuration.Default -> {
             RippleNodeFactory(
                 bounded = bounded,
                 radius = radius,
                 color = color,
+                animations = animations,
                 startRadiusFraction = startRadiusFraction,
                 drawCommand = CircularRippleCommand
             )
@@ -39,12 +45,14 @@ fun circularRipple(
     radius: Dp = Dp.Unspecified,
     @FloatRange(0.0, 1.0)
     startRadiusFraction: Float = DefaultStartRadiusFraction,
+    animations: RippleAnimationDuration = RippleAnimationDuration.Default,
     color: ColorProducer
 ): IndicationNodeFactory {
     return RippleNodeFactory(
         bounded = bounded,
         radius = radius,
         colorProducer = color,
+        animations = animations,
         startRadiusFraction = startRadiusFraction,
         drawCommand = CircularRippleCommand
     )
@@ -55,12 +63,14 @@ private val DefaultCircBoundedRipple = RippleNodeFactory(
     radius = Dp.Unspecified,
     color = Color.Unspecified,
     startRadiusFraction = DefaultStartRadiusFraction,
-    drawCommand = CircularRippleCommand
+    drawCommand = CircularRippleCommand,
+    animations = RippleAnimationDuration.Default
 )
 private val DefaultCircUnboundedRipple = RippleNodeFactory(
     bounded = false,
     radius = Dp.Unspecified,
     color = Color.Unspecified,
     startRadiusFraction = DefaultStartRadiusFraction,
-    drawCommand = CircularRippleCommand
+    drawCommand = CircularRippleCommand,
+    animations = RippleAnimationDuration.Default
 )

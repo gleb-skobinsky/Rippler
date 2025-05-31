@@ -16,7 +16,7 @@ internal class RippleNodeFactory(
     @FloatRange(0.0, 1.0)
     private val startRadiusFraction: Float,
     private val color: Color = Color.Companion.Unspecified,
-    private val animations: RippleAnimationDuration = RippleAnimationDuration.Default,
+    private val animations: RippleAnimationDuration,
     private val colorProducer: ColorProducer? = null,
     private val drawCommand: RippleDrawCommand = SmoothRippleCommand
 ) : IndicationNodeFactory {

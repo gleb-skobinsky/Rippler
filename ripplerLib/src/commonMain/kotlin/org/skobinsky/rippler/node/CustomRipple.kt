@@ -7,6 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorProducer
 import androidx.compose.ui.unit.Dp
+import org.skobinsky.rippler.node.drawBasedRipple.RippleAnimationDuration
 import org.skobinsky.rippler.node.drawBasedRipple.RippleDrawCommand
 import org.skobinsky.rippler.node.drawBasedRipple.RippleNodeFactory
 import org.skobinsky.rippler.node.experimental.ExperimentalRippleApi
@@ -21,16 +22,18 @@ fun rememberCustomRipple(
     color: Color = Color.Unspecified,
     @FloatRange(0.0, 1.0)
     startRadiusFraction: Float = DefaultStartRadiusFraction,
+    animations: RippleAnimationDuration = RippleAnimationDuration.Default,
     drawCommand: RippleDrawCommand
 ): IndicationNodeFactory {
     val rememberedCommand = remember { drawCommand }
-    return remember(bounded, radius, color, rememberedCommand) {
+    return remember(bounded, radius, color, rememberedCommand, animations) {
         RippleNodeFactory(
             bounded = bounded,
             radius = radius,
             startRadiusFraction = startRadiusFraction,
             color = color,
-            drawCommand = rememberedCommand
+            drawCommand = rememberedCommand,
+            animations = animations
         )
     }
 }
@@ -42,6 +45,7 @@ fun rememberCustomRipple(
     radius: Dp = Dp.Unspecified,
     @FloatRange(0.0, 1.0)
     startRadiusFraction: Float = DefaultStartRadiusFraction,
+    animations: RippleAnimationDuration = RippleAnimationDuration.Default,
     color: ColorProducer,
     drawCommand: RippleDrawCommand
 ): IndicationNodeFactory {
@@ -52,7 +56,8 @@ fun rememberCustomRipple(
             radius = radius,
             colorProducer = color,
             startRadiusFraction = startRadiusFraction,
-            drawCommand = rememberedCommand
+            drawCommand = rememberedCommand,
+            animations = animations
         )
     }
 }
