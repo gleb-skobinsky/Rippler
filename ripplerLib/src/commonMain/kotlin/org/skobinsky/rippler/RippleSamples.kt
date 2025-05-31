@@ -28,7 +28,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.skobinsky.rippler.node.circularRipple
 import org.skobinsky.rippler.node.experimental.ExperimentalRippleApi
 import org.skobinsky.rippler.node.opacityRipple.opacityRipple
-import org.skobinsky.rippler.node.rememberCustomRipple
 import org.skobinsky.rippler.node.universalRipple
 import org.skobinsky.rippler.node.waterRipple
 import kotlin.math.PI
