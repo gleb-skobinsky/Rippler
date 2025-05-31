@@ -13,7 +13,7 @@ typealias RippleDrawCommand = DrawScope.(
 ) -> Unit
 
 val SmoothRippleCommand: RippleDrawCommand = { color, center, radius ->
-    val correctedRadius = radius * 1.33f
+    val correctedRadius = radius * 1.5f
     drawCircle(
         brush = Brush.radialGradient(
             listOf(
