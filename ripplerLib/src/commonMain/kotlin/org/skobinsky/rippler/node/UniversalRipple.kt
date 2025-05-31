@@ -9,19 +9,21 @@ import androidx.compose.ui.unit.Dp
 import org.skobinsky.rippler.node.drawBasedRipple.RippleAnimationDuration
 import org.skobinsky.rippler.node.drawBasedRipple.RippleNodeFactory
 
+private const val DefaultSoftRadius = 0.15f
+
 @Stable
 fun universalRipple(
     bounded: Boolean = true,
     radius: Dp = Dp.Unspecified,
     @FloatRange(0.0, 1.0)
-    startRadiusFraction: Float = DefaultStartRadiusFraction,
+    startRadiusFraction: Float = DefaultSoftRadius,
     color: Color = Color.Unspecified,
     animations: RippleAnimationDuration = RippleAnimationDuration.Default
 ): IndicationNodeFactory {
     return when {
         radius != Dp.Unspecified ||
                 color != Color.Unspecified ||
-                startRadiusFraction != DefaultStartRadiusFraction ||
+                startRadiusFraction != DefaultSoftRadius ||
                 animations != RippleAnimationDuration.Default -> {
             RippleNodeFactory(
                 bounded = bounded,
@@ -42,7 +44,7 @@ fun universalRipple(
     bounded: Boolean = true,
     radius: Dp = Dp.Unspecified,
     @FloatRange(0.0, 1.0)
-    startRadiusFraction: Float = DefaultStartRadiusFraction,
+    startRadiusFraction: Float = DefaultSoftRadius,
     animations: RippleAnimationDuration = RippleAnimationDuration.Default,
     color: ColorProducer
 ): IndicationNodeFactory {
@@ -60,13 +62,13 @@ private val DefaultBoundedRipple = RippleNodeFactory(
     bounded = true,
     radius = Dp.Unspecified,
     color = Color.Unspecified,
-    startRadiusFraction = DefaultStartRadiusFraction,
+    startRadiusFraction = DefaultSoftRadius,
     animations = RippleAnimationDuration.Default
 )
 private val DefaultUnboundedRipple = RippleNodeFactory(
     bounded = false,
     radius = Dp.Unspecified,
     color = Color.Unspecified,
-    startRadiusFraction = DefaultStartRadiusFraction,
+    startRadiusFraction = DefaultSoftRadius,
     animations = RippleAnimationDuration.Default
 )
