@@ -9,7 +9,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.clipRect
@@ -20,29 +19,6 @@ import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlin.math.max
-
-typealias RippleDrawCommand = DrawScope.(
-    color: Color,
-    center: Offset,
-    radius: Float
-) -> Unit
-
-val SmoothRippleCommand: RippleDrawCommand = { color, center, radius ->
-    val correctedRadius = radius * 1.33f
-    drawCircle(
-        brush = Brush.radialGradient(
-            listOf(
-                color,
-                color,
-                Color.Transparent
-            ),
-            center = center,
-            radius = correctedRadius
-        ),
-        radius = correctedRadius,
-        center = center
-    )
-}
 
 /**
  * [RippleAnimation]s are drawn as part of [Ripple] as a visual indicator for an different

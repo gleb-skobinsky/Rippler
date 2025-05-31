@@ -12,6 +12,9 @@ struct ComposeView: UIViewControllerRepresentable {
 
 struct ContentView: View {
     var body: some View {
+        ComposeView()
+            .ignoresSafeArea(.all)
+        /*
         ZStack {
             ComposeView()
             Button { } label: {
@@ -27,6 +30,7 @@ struct ContentView: View {
             }
         }
         .ignoresSafeArea(.all)
+        */
     }
 }
 
