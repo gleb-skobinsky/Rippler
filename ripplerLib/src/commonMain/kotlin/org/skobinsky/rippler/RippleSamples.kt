@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -78,11 +79,11 @@ fun MaterialButton() {
 fun StarButton() {
     CompositionLocalProvider(
         LocalIndication provides rememberCustomRipple(
-            color = Color.Red,
+            color = Color.Blue,
             radius = 150.dp,
             startRadiusFraction = 0f
         ) { color, center, radius ->
-            drawStar(radius, center, color)
+            drawStar(true, radius, center, color)
         }
     ) {
         ClickableBox("Star", DpSize(300.dp, 300.dp))
@@ -92,6 +93,7 @@ fun StarButton() {
 fun Double.toRadians(): Double = this * PI / 180.0
 
 private fun DrawScope.drawStar(
+    filled: Boolean,
     radius: Float,
     center: Offset,
     color: Color
@@ -109,14 +111,28 @@ private fun DrawScope.drawStar(
         points.add(Offset(x, y))
     }
 
-    // Draw lines between consecutive points
-    for (i in points.indices) {
-        drawLine(
-            color = color,
-            start = points[i],
-            end = points[(i + 1) % points.size],
-            strokeWidth = 10f
-        )
+    if (filled) {
+        val path = Path().apply {
+            for (i in points.indices) {
+                val offset = points[i]
+                if (i == 0) {
+                    moveTo(offset.x, offset.y)
+                } else {
+                    lineTo(offset.x, offset.y)
+                }
+            }
+        }
+        drawPath(path, color = color)
+    } else {
+        // Draw lines between consecutive points
+        for (i in points.indices) {
+            drawLine(
+                color = color,
+                start = points[i],
+                end = points[(i + 1) % points.size],
+                strokeWidth = 10f
+            )
+        }
     }
 }
 
@@ -143,7 +159,7 @@ fun ExampleButtonPreview() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Cyan)
+            .background(Color.White)
             .systemBarsPadding(),
         verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally
