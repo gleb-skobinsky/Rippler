@@ -69,8 +69,11 @@ dependencies {
     debugImplementation(compose.uiTooling)
 }
 
-fun loadProperties(): Properties {
+fun loadProperties(): Properties? {
     val keystorePropertiesFile = rootProject.file("local.properties")
+    if (!keystorePropertiesFile.exists()) {
+        return null
+    }
     val keystoreProperties = Properties()
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
     return keystoreProperties
@@ -106,16 +109,20 @@ mavenPublishing {
         scm {
             url = "https://github.com/gleb-skobinsky/Rippler"
             connection = "scm:git:git://github.com/gleb-skobinsky/Rippler.git"
-            developerConnection = "scm:git:ssh://git@github.com/gleb-skobinsky/Rippler.git"
+            developerConnection =
+                "scm:git:ssh://git@github.com/gleb-skobinsky/Rippler.git"
         }
     }
 }
 
 signing {
     val props = loadProperties()
-    useInMemoryPgpKeys(
-        props["signing.keyId"].toString(),
-        File(props["signing.secretKeyFile"].toString()).readText(),
-        props["signing.password"].toString()
-    )
+    // null for CI/CD builds
+    props?.let {
+        useInMemoryPgpKeys(
+            props["signing.keyId"].toString(),
+            File(props["signing.secretKeyFile"].toString()).readText(),
+            props["signing.password"].toString()
+        )
+    }
 }
