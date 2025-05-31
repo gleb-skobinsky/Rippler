@@ -81,7 +81,7 @@ mavenPublishing {
 
     signAllPublications()
 
-    coordinates("io.github.gleb-skobinsky", "rippler", "1.0.1")
+    coordinates("io.github.gleb-skobinsky", "rippler", "1.0.2")
 
     pom {
         name = "Rippler"
