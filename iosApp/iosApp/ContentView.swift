@@ -7,17 +7,16 @@ struct ComposeView: UIViewControllerRepresentable {
         MainViewControllerKt.MainViewController()
     }
 
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+    }
 }
 
 struct ContentView: View {
     var body: some View {
-        ComposeView()
-            .ignoresSafeArea(.all)
-        /*
-        ZStack {
+        ZStack(alignment: .bottom) {
             ComposeView()
-            Button { } label: {
+            Button {
+            } label: {
                 Text("SwiftUI Button")
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
@@ -30,7 +29,6 @@ struct ContentView: View {
             }
         }
         .ignoresSafeArea(.all)
-        */
     }
 }
 

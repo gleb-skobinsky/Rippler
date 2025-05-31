@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.skobinsky.rippler.node.circularRipple
 import org.skobinsky.rippler.node.experimental.ExperimentalRippleApi
 import org.skobinsky.rippler.node.opacityRipple.opacityRipple
 import org.skobinsky.rippler.node.rememberCustomRipple
@@ -37,7 +38,16 @@ fun UniversalButton() {
     CompositionLocalProvider(
         LocalIndication provides universalRipple()
     ) {
-        ClickableBox()
+        ClickableBox("Soft")
+    }
+}
+
+@Composable
+fun CircularButton() {
+    CompositionLocalProvider(
+        LocalIndication provides circularRipple()
+    ) {
+        ClickableBox("Circular")
     }
 }
 
@@ -50,7 +60,7 @@ fun FadingButton() {
             minAlpha = 0.25f
         )
     ) {
-        ClickableBox()
+        ClickableBox("Fading")
     }
 }
 
@@ -59,7 +69,7 @@ fun MaterialButton() {
     CompositionLocalProvider(
         LocalIndication provides ripple()
     ) {
-        ClickableBox()
+        ClickableBox("Material")
     }
 }
 
@@ -75,7 +85,7 @@ fun StarButton() {
             drawStar(radius, center, color)
         }
     ) {
-        ClickableBox(DpSize(300.dp, 300.dp))
+        ClickableBox("Star", DpSize(300.dp, 300.dp))
     }
 }
 
@@ -112,6 +122,7 @@ private fun DrawScope.drawStar(
 
 @Composable
 private fun ClickableBox(
+    title: String,
     size: DpSize = DpSize(200.dp, 48.dp)
 ) {
     Box(
@@ -122,7 +133,7 @@ private fun ClickableBox(
             .size(size),
         contentAlignment = Alignment.Center
     ) {
-        Text("Button", fontSize = 24.sp)
+        Text("$title Button", fontSize = 24.sp)
     }
 }
 
@@ -138,6 +149,7 @@ fun ExampleButtonPreview() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         UniversalButton()
+        CircularButton()
         MaterialButton()
         FadingButton()
         StarButton()
