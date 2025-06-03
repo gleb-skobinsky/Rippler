@@ -79,5 +79,7 @@ CompositionLocalProvider(
 Note that the lambda passed in as the drawCommand must not contain any external objects. It will be remembered without keys internally. It is a performance optimization to leave no room for endless lambda recreations and node re-attachments.
 
 The sample code above will produce the following water-like ripple effect:
-![Screen Recording 2025-05-31 at 22 18 50](https://github.com/user-attachments/assets/338a3272-a7cf-4c4e-aaa2-dae061dc752e)
+
+https://github.com/user-attachments/assets/70c22a2a-2622-4842-b640-7c78217f31ec
+
 
