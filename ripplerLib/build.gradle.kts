@@ -33,6 +33,10 @@ kotlin {
         browser()
     }
 
+    js(IR) {
+        browser()
+    }
+
     sourceSets {
         val desktopMain by getting
 
@@ -115,14 +119,14 @@ mavenPublishing {
     }
 }
 
-signing {
-    val props = loadProperties()
-    // null for CI/CD builds
-    props?.let {
-        useInMemoryPgpKeys(
-            props["signing.keyId"].toString(),
-            File(props["signing.secretKeyFile"].toString()).readText(),
-            props["signing.password"].toString()
-        )
-    }
-}
+//signing {
+//    val props = loadProperties()
+//    // null for CI/CD builds
+//    props?.let {
+//        useInMemoryPgpKeys(
+//            props["signing.keyId"].toString(),
+//            File(props["signing.secretKeyFile"].toString()).readText(),
+//            props["signing.password"].toString()
+//        )
+//    }
+//}
