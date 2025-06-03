@@ -48,7 +48,7 @@ CompositionLocalProvider(
   // ...
 }
 ```
-The arguments provided in the example above will look very similar to a native iOS SwiftUI button.
+The arguments provided in the example above will produce an effect looking very similar to a native iOS SwiftUI button.
 
 # Experimental usage
 
