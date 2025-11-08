@@ -9,7 +9,7 @@ In order to install the library with Gradle, be sure to use the `mavenCentral()`
 Then simply use it in any of your source sets (including, but not limited to, `commonMain`):
 
 ```
-implementation("io.github.gleb-skobinsky:rippler:1.0.3")
+implementation("io.github.gleb-skobinsky:rippler:1.0.4")
 ```
 
 # Standard usage

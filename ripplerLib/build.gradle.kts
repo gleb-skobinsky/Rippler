@@ -84,7 +84,7 @@ mavenPublishing {
 
     signAllPublications()
 
-    coordinates("io.github.gleb-skobinsky", "rippler", "1.0.3")
+    coordinates("io.github.gleb-skobinsky", "rippler", "1.0.4")
 
     pom {
         name = "Rippler"
@@ -112,17 +112,5 @@ mavenPublishing {
             developerConnection =
                 "scm:git:ssh://git@github.com/gleb-skobinsky/Rippler.git"
         }
-    }
-}
-
-signing {
-    val props = loadProperties()
-    // null for CI/CD builds
-    props?.let {
-        useInMemoryPgpKeys(
-            props["signing.keyId"].toString(),
-            File(props["signing.secretKeyFile"].toString()).readText(),
-            props["signing.password"].toString()
-        )
     }
 }
